@@ -9,6 +9,7 @@ public class ClienteSocketStream {
 	private InputStream is;
 	private OutputStream os;
 	private boolean live = true;
+	String hjjhv;
 	public void liveCicle() {
 		try {
 			conection();
@@ -17,12 +18,12 @@ public class ClienteSocketStream {
 				if(live)
 					read();
 			}	
-			close();
-			
+			close();	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public void read() throws IOException {
 		is = clientSocket.getInputStream();
 		byte[] mensajeServidor = new byte[256];
@@ -31,6 +32,7 @@ public class ClienteSocketStream {
 		is.read(mensajeServidor);
 		System.out.println("Mensaje recibido: " + mensajeBien);
 	}
+	
 	public void write() throws IOException {
 		os = clientSocket.getOutputStream();
 		String mensaje = sc.nextLine();
@@ -41,6 +43,7 @@ public class ClienteSocketStream {
 		
 		System.out.println("Mensaje enviado");
 	}
+	
 	public void conection() throws IOException {
 		System.out.println("Creando socket cliente");
 		clientSocket = new Socket();
@@ -48,6 +51,7 @@ public class ClienteSocketStream {
 		addr = new InetSocketAddress("localhost", 5555);
 		clientSocket.connect(addr);
 	}
+	
 	public void close() throws IOException {
 		System.out.println("Cerrando el socket cliente");
 		clientSocket.close();
@@ -58,6 +62,4 @@ public class ClienteSocketStream {
 		ClienteSocketStream css = new ClienteSocketStream();
 		css.liveCicle();
 	}
-	
-	
 }
